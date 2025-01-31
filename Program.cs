@@ -8,8 +8,8 @@ namespace BookStoreApp
 {
     public class Författare
     {
-        [BsonId] // Använd MongoDB's ObjectId som ID
-        public ObjectId ID { get; set; } // Här använder vi ObjectId istället för int
+        [BsonId]
+        public ObjectId ID { get; set; } 
         public string Förnamn { get; set; }
         public string Efternamn { get; set; }
         public DateTime Födelsedatum { get; set; }
@@ -34,7 +34,7 @@ namespace BookStoreApp
         public string Email { get; set; }
         public string Telefonnummer { get; set; }
         public string Favoritgenre { get; set; }
-        public ObjectId? FavoritförfattareID { get; set; }  // Referens till Författare som ObjectId
+        public ObjectId? FavoritförfattareID { get; set; } 
         public Författare FavoritFörfattare { get; set; }
     }
 
@@ -46,7 +46,7 @@ namespace BookStoreApp
         public string Språk { get; set; }
         public decimal Pris { get; set; }
         public DateTime Utgivningsdatum { get; set; }
-        public ObjectId FörfattareID { get; set; } // Referens till Författare
+        public ObjectId FörfattareID { get; set; } 
         public string Genre { get; set; }
     }
 
@@ -54,7 +54,7 @@ namespace BookStoreApp
     {
         [BsonId]
         public ObjectId ID { get; set; }
-        public ObjectId CustomerID { get; set; }  // Referens till Customer som ObjectId
+        public ObjectId CustomerID { get; set; } 
         public Customer Customer { get; set; }
         public DateTime Orderdatum { get; set; }
         public decimal Totalamount { get; set; }
@@ -64,8 +64,8 @@ namespace BookStoreApp
     {
         [BsonId]
         public ObjectId ID { get; set; }
-        public ObjectId ButikID { get; set; }  // Referens till Butiker som ObjectId
-        public ObjectId BokID { get; set; }    // Referens till Böcker som ObjectId
+        public ObjectId ButikID { get; set; }  
+        public ObjectId BokID { get; set; }    
         public int Antal { get; set; }
     }
 
@@ -130,10 +130,8 @@ namespace BookStoreApp
             Console.Clear();
             Console.WriteLine("Välj en butik:");
 
-            // Hämta listan över butiker
             var butikern = context.Butiker.Find(_ => true).ToList();
 
-            // Visa butikerna för användaren
             for (int i = 0; i < butikern.Count; i++)
             {
                 Console.WriteLine($"{i + 1}. {butikern[i].Butiksnamn}");
@@ -162,11 +160,10 @@ namespace BookStoreApp
             var lagersaldo = new Lagersaldo
             {
                 ButikID = butik.ID,
-                BokID = bok.ISBN13,  // Referens till bok
+                BokID = bok.ISBN13, 
                 Antal = antal
             };
 
-            // Lägg till i Lagersaldo
             context.Lagersaldo.InsertOne(lagersaldo);
 
             Console.WriteLine("Bok har lagts till i butiken!");
