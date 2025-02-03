@@ -42,15 +42,15 @@ namespace BookStoreApp
     public class Böcker
     {
         [BsonId]
-        public ObjectId Id { get; set; }  // Keep ObjectId for the book
+        public ObjectId Id { get; set; }  
 
         public string Titel { get; set; }
         public string Språk { get; set; }
         public decimal Pris { get; set; }
         public DateTime Utgivningsdatum { get; set; }
 
-        [BsonRepresentation(BsonType.ObjectId)]  // This ensures it's stored as an ObjectId, even if it's a string in the database
-        public ObjectId FörfattareID { get; set; }  // Change to ObjectId for the author's reference
+        [BsonRepresentation(BsonType.ObjectId)] 
+        public ObjectId FörfattareID { get; set; }  
 
         public string Genre { get; set; }
     }
@@ -71,7 +71,7 @@ namespace BookStoreApp
         [BsonId]
         public ObjectId ID { get; set; }
         public ObjectId ButikID { get; set; }
-        public ObjectId BokID { get; set; }  // Changed BokID to ObjectId to reference the book's _id
+        public ObjectId BokID { get; set; }  
         public int Antal { get; set; }
     }
 
@@ -107,7 +107,7 @@ namespace BookStoreApp
                 Console.WriteLine("1. Lista lagersaldo för butiker");
                 Console.WriteLine("2. Lägg till bok i butik");
                 Console.WriteLine("3. Ta bort bok från butik");
-                Console.WriteLine("5. Avsluta");  // Removed the "4. Ta bort författare"
+                Console.WriteLine("5. Avsluta");  
                 Console.Write("Välj ett alternativ: ");
                 var choice = Console.ReadLine();
                 switch (choice)
@@ -162,7 +162,7 @@ namespace BookStoreApp
             Console.WriteLine("\nVälj en bok att lägga till:");
             for (int i = 0; i < böcker.Count; i++)
             {
-                Console.WriteLine($"{i + 1}. {böcker[i].Titel} ({böcker[i].Id})");  // Display ObjectId
+                Console.WriteLine($"{i + 1}. {böcker[i].Titel} ({böcker[i].Id})");  
             }
 
             Console.Write("Ange bokens nummer: ");
@@ -179,7 +179,7 @@ namespace BookStoreApp
                 var lagersaldo = new Lagersaldo
                 {
                     ButikID = butik.ID,
-                    BokID = bok.Id,  // Store the ObjectId of the selected book
+                    BokID = bok.Id,  
                     Antal = antal
                 };
 
@@ -208,7 +208,7 @@ namespace BookStoreApp
             foreach (var lagersaldo in lagersaldoList)
             {
                 var butik = butikerList.FirstOrDefault(b => b.ID == lagersaldo.ButikID);
-                var bok = böckerList.FirstOrDefault(b => b.Id == lagersaldo.BokID);  // Use ObjectId to match the book
+                var bok = böckerList.FirstOrDefault(b => b.Id == lagersaldo.BokID);  
 
                 if (butik != null && bok != null)
                 {
@@ -254,7 +254,7 @@ namespace BookStoreApp
             Console.WriteLine("\nVälj en bok att ta bort:");
             for (int i = 0; i < lagersaldo.Count; i++)
             {
-                var bok = context.Böcker.Find(b => b.Id == lagersaldo[i].BokID).FirstOrDefault();  // Find book by ObjectId
+                var bok = context.Böcker.Find(b => b.Id == lagersaldo[i].BokID).FirstOrDefault(); 
                 Console.WriteLine($"{i + 1}. {bok?.Titel} ({lagersaldo[i].Antal} st)");
             }
 
