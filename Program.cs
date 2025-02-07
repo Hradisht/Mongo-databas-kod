@@ -97,7 +97,7 @@ namespace BookStoreApp
     {
         static void Main(string[] args)
         {
-            var context = new BookStoreContext("mongodb://localhost:27017", "BookStoreDB");
+            var context = new BookStoreContext("mongodb+srv://glenncouesme:1jgqur1g6sNh79IW@cluster0.pymok.mongodb.net/\r\n", "BookStoreDB"); // Byt ut connection stringen till atlasen 
 
             bool fortsätt = true;
             while (fortsätt)
